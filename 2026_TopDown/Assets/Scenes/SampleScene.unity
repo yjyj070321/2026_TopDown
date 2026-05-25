@@ -208,23 +208,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a41e6ec128cb48a56337b7e4c1ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 1
+  moveSpeed: 0.8
   spriteUp:
-  - {fileID: -8393169711176511969, guid: bdf1e35839a8fe841abd691938bc0847, type: 3}
-  - {fileID: -3009659751897613197, guid: ff7ee109e8759fa4e8c943a71715930f, type: 3}
-  - {fileID: -87951857334250037, guid: 0066e34bf11f53747bd6ce3e481b67b5, type: 3}
+  - {fileID: 21300000, guid: 97efdba56893c3542b6d660bcf0cf7b1, type: 3}
+  - {fileID: 21300000, guid: c8b48c91e948a944f818994cc32985d7, type: 3}
+  - {fileID: 21300000, guid: 2d09a71d64b208b41acc78d9e0bddebb, type: 3}
+  - {fileID: 21300000, guid: 4c9cba7281cd70c4791cd83a43a6dc64, type: 3}
+  - {fileID: 21300000, guid: c2fff49215572b945a7b31ba46139f03, type: 3}
+  - {fileID: 21300000, guid: ed0f77d39f9136140b186efafe159beb, type: 3}
   spriteDown:
-  - {fileID: 8894105245806051599, guid: 23b61cb26b078554ea5a7843653dee95, type: 3}
-  - {fileID: 1259403999637839662, guid: 70d072213a67f7b45b38645674bf17b5, type: 3}
-  - {fileID: 7926631094506107384, guid: 407c6cdf9898a484c9a5feb665eab7b1, type: 3}
+  - {fileID: 21300000, guid: 9199e288a3a3b454eba8b887fbc6a579, type: 3}
+  - {fileID: 21300000, guid: 09e045fa38d5345428b7cc0825c6b9ca, type: 3}
+  - {fileID: 21300000, guid: b984842b5242754478517401cc2f074f, type: 3}
+  - {fileID: 21300000, guid: 029c58a9333da884eb08971a23db9ea4, type: 3}
+  - {fileID: 21300000, guid: 7a135133a824a4947a1cd1753326f794, type: 3}
+  - {fileID: 21300000, guid: 7873ec7a259b3aa4fa61731c9a01247d, type: 3}
   spriteLeft:
-  - {fileID: 7827470447151488021, guid: 447304e389b23444a81d7b06f84bf53e, type: 3}
-  - {fileID: -1001214729499911652, guid: dc0f03dad3e08a24ca0572b6bfa2e1b0, type: 3}
-  - {fileID: -6994915466344122352, guid: d072276f2e606184b987572570bc8c8c, type: 3}
+  - {fileID: 21300000, guid: 6e9ffa6e76ba0034ca5b52ceae715b78, type: 3}
+  - {fileID: 21300000, guid: fcefdceb82357064498cc48f5782993d, type: 3}
+  - {fileID: 21300000, guid: feb37fc109991a0408e23dd33f02bb02, type: 3}
+  - {fileID: 21300000, guid: 55fc06c07d9880a40b19044adcaaca18, type: 3}
+  - {fileID: 21300000, guid: a8bba5e766ca6914aacb2b33fab9170d, type: 3}
+  - {fileID: 21300000, guid: 8e04d456d66a9184990902eef2e20aba, type: 3}
   spriteRight:
-  - {fileID: 5534413525631299974, guid: 90f2dada100c92d4bab21b729395f476, type: 3}
-  - {fileID: 2823216415284645959, guid: c996119f447159a48b82799218eae4e3, type: 3}
-  - {fileID: -7489089114631842765, guid: 7095dc27c846a894dbb85262da5bca43, type: 3}
+  - {fileID: 21300000, guid: d12624986e2690642965604c0ce88bc1, type: 3}
+  - {fileID: 21300000, guid: 2a7874983eb438048978312e396abf7e, type: 3}
+  - {fileID: 21300000, guid: ab41b2b506543c048aa30f90e6348e53, type: 3}
+  - {fileID: 21300000, guid: 9660c14de1422b64184925035da656cf, type: 3}
+  - {fileID: 21300000, guid: e1f3536cc06fe9940934e5fe0ac0e699, type: 3}
+  - {fileID: 21300000, guid: 6047c6d7815ae934681cb7adf8b0b5eb, type: 3}
   frameTime: 0.15
 --- !u!212 &70558310
 SpriteRenderer:
@@ -283,7 +295,7 @@ SpriteRenderer:
   m_Size: {x: 0.14, y: 0.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &70558311
 Transform:
