@@ -21,10 +21,14 @@ public class PlayerController : MonoBehaviour
     private int frameIndex = 0;
     private float timer = 0f;
 
+    private PlayerAttack attack;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        attack = GetComponent<PlayerAttack>();
 
         currentSprites = spriteDown;
         sr.sprite = currentSprites[0];
@@ -55,6 +59,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (attack != null && attack.IsAttacking())
+            return;
+
         if (input.sqrMagnitude <= 0.01f)
         {
             frameIndex = 0;
@@ -89,6 +96,12 @@ public class PlayerController : MonoBehaviour
         currentSprites = newSprites;
         frameIndex = 0;
         timer = 0f;
+
         sr.sprite = currentSprites[frameIndex];
+    }
+
+    public Vector2 GetDirection()
+    {
+        return input;
     }
 }
