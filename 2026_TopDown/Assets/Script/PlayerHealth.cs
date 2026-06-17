@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour
     public float hitFlashTime = 0.12f;
 
     private int currentHp;
-
     private SpriteRenderer sr;
 
     void Awake()
@@ -27,13 +26,16 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHp -= damage;
 
-        StartCoroutine(DamageFlash());
+        if (currentHp < 0)
+            currentHp = 0;
 
-        Debug.Log("플레이어 체력 : " + currentHp);
+        Debug.Log("현재 체력 : " + currentHp + "/" + maxHp);
+
+        StartCoroutine(DamageFlash());
 
         if (currentHp <= 0)
         {
-            Die();
+            StartCoroutine(DieCoroutine());
         }
     }
 
@@ -41,29 +43,23 @@ public class PlayerHealth : MonoBehaviour
     {
         if (sr != null)
         {
-            sr.color =
-                new Color(
-                    1f,
-                    0.4f,
-                    0.4f
-                );
+            sr.color = new Color(1f, 0.4f, 0.4f);
         }
 
-        yield return new WaitForSeconds(
-            hitFlashTime
-        );
+        yield return new WaitForSeconds(hitFlashTime);
 
         if (sr != null)
         {
-            sr.color =
-                Color.white;
+            sr.color = Color.white;
         }
     }
 
-    void Die()
+    IEnumerator DieCoroutine()
     {
-        Debug.Log("플레이어 사망");
+        // 체력바가 0으로 갱신될 시간 1프레임 줌
+        yield return null;
 
+        Debug.Log("플레이어 사망");
         Destroy(gameObject);
     }
 
@@ -72,13 +68,16 @@ public class PlayerHealth : MonoBehaviour
         return currentHp;
     }
 
+    public int GetMaxHp()
+    {
+        return maxHp;
+    }
+
     public void Heal(int amount)
     {
         currentHp += amount;
 
         if (currentHp > maxHp)
-        {
             currentHp = maxHp;
-        }
     }
 }
