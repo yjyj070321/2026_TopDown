@@ -38,13 +38,14 @@ public class PlayerAttack : MonoBehaviour
     {
         isAttacking = true;
 
+        UpdateHitboxPosition();
+
         Sprite[] attackSprites = GetAttackSprites();
 
         for (int i = 0; i < attackSprites.Length; i++)
         {
             sr.sprite = attackSprites[i];
 
-            // 칼이 맞는 프레임
             if (i == 1)
                 swordHitbox.SetActive(true);
 
@@ -71,6 +72,41 @@ public class PlayerAttack : MonoBehaviour
             return dir.y > 0
                 ? attackUp
                 : attackDown;
+        }
+    }
+
+    void UpdateHitboxPosition()
+    {
+        Vector2 dir = movement.GetDirection();
+
+        float xOffset = 0.35f;
+        float yOffset = 0.25f;
+
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        {
+            if (dir.x > 0)
+            {
+                swordHitbox.transform.localPosition =
+                    new Vector3(xOffset, -0.05f, 0f);
+            }
+            else
+            {
+                swordHitbox.transform.localPosition =
+                    new Vector3(-xOffset, -0.05f, 0f);
+            }
+        }
+        else
+        {
+            if (dir.y > 0)
+            {
+                swordHitbox.transform.localPosition =
+                    new Vector3(0f, yOffset, 0f);
+            }
+            else
+            {
+                swordHitbox.transform.localPosition =
+                    new Vector3(0f, -yOffset, 0f);
+            }
         }
     }
 

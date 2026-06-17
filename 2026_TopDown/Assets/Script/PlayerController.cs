@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
 
     private Vector2 input;
+
+    // 마지막으로 바라본 방향 저장
+    private Vector2 lastDirection = Vector2.down;
+
     private Sprite[] currentSprites;
 
     private int frameIndex = 0;
@@ -38,8 +42,11 @@ public class PlayerController : MonoBehaviour
     {
         input = value.Get<Vector2>();
 
+        // 입력이 있을 때만 마지막 방향 갱신
         if (input.sqrMagnitude > 0.01f)
         {
+            lastDirection = input;
+
             if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             {
                 if (input.x > 0)
@@ -100,8 +107,9 @@ public class PlayerController : MonoBehaviour
         sr.sprite = currentSprites[frameIndex];
     }
 
+    // 공격은 마지막 바라본 방향을 사용
     public Vector2 GetDirection()
     {
-        return input;
+        return lastDirection;
     }
 }
