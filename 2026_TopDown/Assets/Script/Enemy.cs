@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
     [Header("이동")]
     public float moveSpeed = 2f;
 
+    [Header("플레이어 감지 거리")]
+    public float detectDistance = 5f;
+
     [Header("붙는 거리")]
     public float stopDistance = 0.08f;
 
@@ -28,32 +31,38 @@ public class Enemy : MonoBehaviour
     public int touchDamage = 1;
     public float attackCooldown = 1f;
 
-    Transform player;
+    private Transform player;
 
-    Rigidbody2D rb;
-    SpriteRenderer sr;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
-    Vector2 moveDir;
+    private Vector2 moveDir;
 
-    int currentHp;
+    private int currentHp;
 
-    Sprite[] currentSprites;
+    private Sprite[] currentSprites;
 
-    int frameIndex;
-    float animationTimer;
-    float damageTimer;
+    private int frameIndex;
 
-    bool isKnockback;
+    private float animationTimer;
+
+    private float damageTimer;
+
+    private bool isKnockback;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
         sr = GetComponent<SpriteRenderer>();
 
         currentSprites = spriteDown;
 
-        if (currentSprites.Length > 0)
+        if (currentSprites != null &&
+            currentSprites.Length > 0)
+        {
             sr.sprite = currentSprites[0];
+        }
     }
 
     void Start()
@@ -64,7 +73,9 @@ public class Enemy : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player");
 
         if (p != null)
+        {
             player = p.transform;
+        }
     }
 
     void FixedUpdate()
@@ -74,9 +85,7 @@ public class Enemy : MonoBehaviour
 
         if (player == null)
         {
-            rb.linearVelocity =
-                Vector2.zero;
-
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
@@ -84,7 +93,23 @@ public class Enemy : MonoBehaviour
             player.position -
             transform.position;
 
-        if (toPlayer.magnitude <= stopDistance)
+        float distance =
+            toPlayer.magnitude;
+
+        // 감지 범위 밖
+        if (distance > detectDistance)
+        {
+            moveDir =
+                Vector2.zero;
+
+            rb.linearVelocity =
+                Vector2.zero;
+
+            return;
+        }
+
+        // 너무 가까우면 멈춤
+        if (distance <= stopDistance)
         {
             moveDir =
                 Vector2.zero;
@@ -138,6 +163,9 @@ public class Enemy : MonoBehaviour
 
     void Animate()
     {
+        if (currentSprites == null)
+            return;
+
         if (currentSprites.Length <= 1)
             return;
 
@@ -150,7 +178,9 @@ public class Enemy : MonoBehaviour
             frameIndex++;
 
             if (frameIndex >= currentSprites.Length)
+            {
                 frameIndex = 0;
+            }
 
             sr.sprite =
                 currentSprites[frameIndex];
@@ -167,8 +197,11 @@ public class Enemy : MonoBehaviour
 
         frameIndex = 0;
 
-        sr.sprite =
-            currentSprites[0];
+        if (currentSprites.Length > 0)
+        {
+            sr.sprite =
+                currentSprites[0];
+        }
     }
 
     public void TakeDamage(int damage)
