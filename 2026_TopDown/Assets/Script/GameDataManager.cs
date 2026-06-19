@@ -1,108 +1,50 @@
-using System.IO;
+using System;
 using UnityEngine;
+
+[Serializable]
+public class PlayerData
+{
+    public float volume = 1f;
+    public bool BGM = true;
+}
 
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance;
-    public GameSettingData gameSettingData;
-    public SaveData saveData;
-    public int isTutorialFinished;
+    public PlayerData playerData;
 
-    private string savePath;
     private void Awake()
     {
         if (Instance == null)
         {
-             Instance = this;
-            DontDestroyOnLoad (gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
-            savePath = Application.persistentDataPath + "/saveData. json";
-
-            LoadJsonData();
-            LoadPlayerPrefs();
+            playerData = LoadData();
         }
         else
         {
             Destroy(gameObject);
-    
         }
-       
     }
 
-    public int GetPlayerHp()
+    public void SaveData(PlayerData playerData)
     {
-        int baseHp = gameSettingData.startHp;
-        int bonusHp = gameSettingData.hpBonusPerDeath;
-        return baseHp + bonusHp * saveData.deathCount;
+        string filePath = Application.persistentDataPath + "/player_data.json";
+        string json = JsonUtility.ToJson(playerData, true);
+        System.IO.File.WriteAllText(filePath, json);
     }
 
-    public float GetPlayerMoveSpeed()
+    public PlayerData LoadData()
     {
-        return gameSettingData.playerMoveSpeed;
-    }
+        string filePath = Application.persistentDataPath + "/player_data.json";
 
-    public void SaveGameResult()
-    {
-        saveData.deathCount++;
-        SaveJsonData();
-    }
-
-    public void SaveJsonData()
-    {
-        string json = JsonUtility. ToJson(saveData, true);
-        File.WriteAllText(savePath, json);
-
-        Debug.Log("JSON 저장 완료: " + savePath);
-    }
-
-    public void LoadJsonData()
-    {
-        if (File.Exists(savePath))
+        if (System.IO.File.Exists(filePath))
         {
-            string json = File.ReadAllText(savePath);
-            saveData = JsonUtility.FromJson<SaveData>(json);
+            string json = System.IO.File.ReadAllText(filePath);
+            return JsonUtility.FromJson<PlayerData>(json);
         }
-        else
-        {
-            saveData = new SaveData();
-            SaveJsonData();
-        }
-    
+
+        return new PlayerData();
     }
-
-    public void DeleteJsonData()
-    {
-        if (File.Exists(savePath))
-        {
-            File.Delete(savePath);
-        }
-    
-        saveData = new SaveData();
-        SaveJsonData();
-
-        Debug.Log("JSON 저장 데이터 삭제");
-    }
-
-    public void LoadPlayerPrefs()
-    {
-        isTutorialFinished = PlayerPrefs.GetInt("TUTORIAL", 0);
-    }
-
-    public void SavePlayerPrefs()
-    {
-        PlayerPrefs.SetInt("TUTORIAL", isTutorialFinished);
-        PlayerPrefs.Save();
-
-        Debug.Log("PlayerPrefs 저장 완료");
-    }
-
-    public void DeletePlayerPrefs()
-    {
-        // 튜토리얼 유무 정보 삭제하고 싶을 때 해당 함수 사용
-        PlayerPrefs.DeleteKey("TUTORIAL");
-        LoadPlayerPrefs();
-
-        Debug.Log("PlayerPrefs 삭제 완료");
-    }
-
 }
