@@ -50,6 +50,8 @@ public class Enemy : MonoBehaviour
 
     private bool isKnockback;
 
+    private bool isDead;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isKnockback)
+        if (isKnockback || isDead)
             return;
 
         if (player == null)
@@ -96,7 +98,6 @@ public class Enemy : MonoBehaviour
         float distance =
             toPlayer.magnitude;
 
-        // 감지 범위 밖
         if (distance > detectDistance)
         {
             moveDir =
@@ -108,7 +109,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // 너무 가까우면 멈춤
         if (distance <= stopDistance)
         {
             moveDir =
@@ -130,6 +130,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+            return;
+
         damageTimer -= Time.deltaTime;
 
         UpdateDirection();
@@ -206,11 +209,10 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHp -= damage;
+        if (isDead)
+            return;
 
-        StartCoroutine(
-            DamageEffect()
-        );
+        currentHp -= damage;
 
         if (player != null)
         {
@@ -227,7 +229,15 @@ public class Enemy : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(
+                DieEffect()
+            );
+        }
+        else
+        {
+            StartCoroutine(
+                DamageEffect()
+            );
         }
     }
 
@@ -247,6 +257,27 @@ public class Enemy : MonoBehaviour
 
         sr.color =
             Color.white;
+    }
+
+    IEnumerator DieEffect()
+    {
+        isDead = true;
+
+        sr.color =
+            new Color(
+                1f,
+                0.2f,
+                0.2f
+            );
+
+        yield return
+            new WaitForSeconds(
+                0.12f
+            );
+
+        Destroy(
+            gameObject
+        );
     }
 
     IEnumerator Knockback(
