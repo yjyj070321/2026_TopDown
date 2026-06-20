@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
@@ -18,100 +19,211 @@ public class PlayerAttack : MonoBehaviour
 
     private bool isAttacking = false;
 
-    private void Awake()
+    public static int CurrentDamage
     {
-        sr = GetComponent<SpriteRenderer>();
-        movement = GetComponent<PlayerController>();
+        get
+        {
+            if (GameDataManager.Instance != null)
+            {
+                return GameDataManager
+                    .Instance
+                    .GetAttack();
+            }
 
-        swordHitbox.SetActive(false);
+            return 1;
+        }
     }
 
-    public void OnAttack(InputValue value)
+    private void Awake()
     {
-        if (!isAttacking)
+        sr =
+            GetComponent<
+                SpriteRenderer
+            >();
+
+        movement =
+            GetComponent<
+                PlayerController
+            >();
+
+        if (
+            swordHitbox != null
+        )
         {
-            StartCoroutine(Attack());
+            swordHitbox
+                .SetActive(
+                    false
+                );
+        }
+    }
+
+    public void OnAttack(
+        InputValue value
+    )
+    {
+        // UI 클릭 중이면 공격 금지
+        if (
+            EventSystem.current
+            != null
+            &&
+            EventSystem
+            .current
+            .IsPointerOverGameObject()
+        )
+        {
+            return;
+        }
+
+        // 강화창 열렸을 때 공격 금지
+        if (
+            Time.timeScale
+            == 0f
+        )
+        {
+            return;
+        }
+
+        if (
+            !isAttacking
+        )
+        {
+            StartCoroutine(
+                Attack()
+            );
         }
     }
 
     IEnumerator Attack()
     {
-        isAttacking = true;
+        isAttacking =
+            true;
 
         UpdateHitboxPosition();
 
-        Sprite[] attackSprites = GetAttackSprites();
+        Sprite[] attackSprites =
+            GetAttackSprites();
 
-        for (int i = 0; i < attackSprites.Length; i++)
+        for (
+            int i = 0;
+            i < attackSprites.Length;
+            i++
+        )
         {
-            sr.sprite = attackSprites[i];
+            sr.sprite =
+                attackSprites[i];
 
-            if (i == 1)
-                swordHitbox.SetActive(true);
+            if (
+                i == 1
+            )
+            {
+                swordHitbox
+                    .SetActive(
+                        true
+                    );
+            }
 
-            yield return new WaitForSeconds(frameTime);
+            yield return
+                new WaitForSeconds(
+                    frameTime
+                );
         }
 
-        swordHitbox.SetActive(false);
+        swordHitbox
+            .SetActive(
+                false
+            );
 
-        isAttacking = false;
+        isAttacking =
+            false;
     }
 
     Sprite[] GetAttackSprites()
     {
-        Vector2 dir = movement.GetDirection();
+        Vector2 dir =
+            movement
+            .GetDirection();
 
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        if (
+            Mathf.Abs(
+                dir.x
+            )
+            >
+            Mathf.Abs(
+                dir.y
+            )
+        )
         {
-            return dir.x > 0
-                ? attackRight
-                : attackLeft;
+            return
+                dir.x > 0
+                ?
+                attackRight
+                :
+                attackLeft;
         }
-        else
-        {
-            return dir.y > 0
-                ? attackUp
-                : attackDown;
-        }
+
+        return
+            dir.y > 0
+            ?
+            attackUp
+            :
+            attackDown;
     }
 
     void UpdateHitboxPosition()
     {
-        Vector2 dir = movement.GetDirection();
+        Vector2 dir =
+            movement
+            .GetDirection();
 
-        float xOffset = 0.35f;
-        float yOffset = 0.25f;
+        float xOffset =
+            0.35f;
 
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        float yOffset =
+            0.25f;
+
+        if (
+            Mathf.Abs(
+                dir.x
+            )
+            >
+            Mathf.Abs(
+                dir.y
+            )
+        )
         {
-            if (dir.x > 0)
-            {
-                swordHitbox.transform.localPosition =
-                    new Vector3(xOffset, -0.05f, 0f);
-            }
-            else
-            {
-                swordHitbox.transform.localPosition =
-                    new Vector3(-xOffset, -0.05f, 0f);
-            }
+            swordHitbox
+                .transform
+                .localPosition =
+                new Vector3(
+                    dir.x > 0
+                    ?
+                    xOffset
+                    :
+                    -xOffset,
+                    -0.05f,
+                    0f
+                );
         }
         else
         {
-            if (dir.y > 0)
-            {
-                swordHitbox.transform.localPosition =
-                    new Vector3(0f, yOffset, 0f);
-            }
-            else
-            {
-                swordHitbox.transform.localPosition =
-                    new Vector3(0f, -yOffset, 0f);
-            }
+            swordHitbox
+                .transform
+                .localPosition =
+                new Vector3(
+                    0f,
+                    dir.y > 0
+                    ?
+                    yOffset
+                    :
+                    -yOffset,
+                    0f
+                );
         }
     }
 
     public bool IsAttacking()
     {
-        return isAttacking;
+        return
+            isAttacking;
     }
 }

@@ -3,43 +3,67 @@ using TMPro;
 
 public class CoinManager : MonoBehaviour
 {
-public static CoinManager instance;
+    public static CoinManager instance;
 
-[Header("코인 UI")]
-public TMP_Text coinText;
+    public TMP_Text coinText;
 
-private int coinCount = 0;
+    private int coinCount;
 
-void Awake()
-{
-    instance = this;
-}
-
-void Start()
-{
-    UpdateUI();
-}
-
-public void AddCoin(int amount)
-{
-    coinCount += amount;
-
-    UpdateUI();
-
-    Debug.Log("현재 코인 : " + coinCount);
-}
-
-void UpdateUI()
-{
-    if (coinText != null)
+    void Awake()
     {
-        coinText.text = "코인 : " + coinCount;
+        instance = this;
     }
-}
 
-public int GetCoin()
-{
-    return coinCount;
-}
+    void Start()
+    {
+        coinCount =
+            GameDataManager
+            .Instance
+            .GetGold();
 
+        UpdateUI();
+    }
+
+    public void AddCoin(
+        int amount
+    )
+    {
+        coinCount += amount;
+
+        GameDataManager
+            .Instance
+            .SetGold(
+                coinCount
+            );
+
+        UpdateUI();
+    }
+
+    public void Refresh()
+    {
+        coinCount =
+            GameDataManager
+            .Instance
+            .GetGold();
+
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        if (
+            coinText != null
+        )
+        {
+            coinText.text =
+                "코인 : "
+                +
+                coinCount;
+        }
+    }
+
+    public int GetCoin()
+    {
+        return coinCount;
+    }
 }
