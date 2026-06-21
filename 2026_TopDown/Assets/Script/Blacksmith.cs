@@ -7,8 +7,6 @@ public class Blacksmith : MonoBehaviour
     [Header("강화 UI")]
     public GameObject upgradePanel;
 
-    public TMP_Text attackText;
-
     public TMP_Text costText;
 
     [Header("대장장이 애니메이션")]
@@ -62,35 +60,22 @@ public class Blacksmith : MonoBehaviour
         if (
             playerInside
             &&
-            Keyboard
-            .current
+            Keyboard.current
             .eKey
             .wasPressedThisFrame
         )
         {
             if (
-                !upgradePanel
+                upgradePanel
                 .activeSelf
             )
             {
+                CloseUI();
+            }
+            else
+            {
                 OpenUI();
             }
-        }
-
-        if (
-            upgradePanel
-            != null
-            &&
-            upgradePanel
-            .activeSelf
-            &&
-            Keyboard
-            .current
-            .escapeKey
-            .wasPressedThisFrame
-        )
-        {
-            CloseUI();
         }
     }
 
@@ -106,8 +91,7 @@ public class Blacksmith : MonoBehaviour
         }
 
         timer +=
-            Time
-            .unscaledDeltaTime;
+            Time.unscaledDeltaTime;
 
         if (
             timer >= frameTime
@@ -143,13 +127,6 @@ public class Blacksmith : MonoBehaviour
         Time.timeScale =
             0f;
 
-        attackText.text =
-            "현재 공격력 : "
-            +
-            GameDataManager
-            .Instance
-            .GetAttack();
-
         costText.text =
             "강화 비용 : 5 골드";
     }
@@ -159,13 +136,6 @@ public class Blacksmith : MonoBehaviour
         GameDataManager
             .Instance
             .UpgradeAttack();
-
-        attackText.text =
-            "현재 공격력 : "
-            +
-            GameDataManager
-            .Instance
-            .GetAttack();
     }
 
     public void CloseUI()
@@ -209,13 +179,7 @@ public class Blacksmith : MonoBehaviour
             playerInside =
                 false;
 
-            if (
-                upgradePanel
-                != null
-            )
-            {
-                CloseUI();
-            }
+            CloseUI();
         }
     }
 }
