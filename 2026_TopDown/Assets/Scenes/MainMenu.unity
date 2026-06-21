@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: clipBGM
       value: 
       objectReference: {fileID: 8300000, guid: 47076738c2c7076428d67e4c7fa10804, type: 3}
+    - target: {fileID: 9223322033161780846, guid: 7d6394c77e56b3c4b922042c24d1533a, type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 1798765608}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -455,6 +459,34 @@ PrefabInstance:
     - target: {fileID: 6174834742488564791, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MainMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1334926566}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeBGMVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Soundmanager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333002347697726532, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6619604287743628870, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
       propertyPath: m_text
@@ -830,6 +862,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012047588}
   m_CullTransparentMesh: 1
+--- !u!114 &1334926566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9223322033161780846, guid: 7d6394c77e56b3c4b922042c24d1533a, type: 3}
+  m_PrefabInstance: {fileID: 193424792}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f903c60b36420c4a908b50eab0ec7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Soundmanager
 --- !u!1001 &1359162857
 PrefabInstance:
   m_ObjectHideFlags: 0
