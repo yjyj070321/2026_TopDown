@@ -1733,6 +1733,7 @@ MonoBehaviour:
     BGM: 1
     gold: 0
     attack: 1
+  playerStat: {fileID: 11400000, guid: ab3bbad5a4b526142b7835ec39b21fa9, type: 2}
 --- !u!4 &943045174
 Transform:
   m_ObjectHideFlags: 0

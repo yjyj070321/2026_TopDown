@@ -11,6 +11,8 @@ public class Soundmanager : MonoBehaviour
     [Header("UI")]
     public Slider volumeSlider;
 
+    public Toggle bgmToggle;
+
     AudioSource audioSourceBGM;
     AudioSource audioSource;
 
@@ -32,29 +34,44 @@ public class Soundmanager : MonoBehaviour
             .Instance
             .playerData;
 
+        // PlayerPrefs에서 BGM 상태 복구
+        data.BGM =
+            PlayerPrefs.GetInt(
+                "BGM",
+                1
+            ) == 1;
+
         // 슬라이더 위치 복구
         if (
             volumeSlider != null
         )
         {
-            volumeSlider.SetValueWithoutNotify(
-                data.volume
-            );
+            volumeSlider
+                .SetValueWithoutNotify(
+                    data.volume
+                );
+        }
+
+        // 토글 상태 복구
+        if (
+            bgmToggle != null
+        )
+        {
+            bgmToggle
+                .SetIsOnWithoutNotify(
+                    data.BGM
+                );
         }
 
         audioSource.volume =
             data.volume;
 
-        if (data.BGM)
-        {
-            audioSourceBGM.volume =
-                data.volume;
-        }
-        else
-        {
-            audioSourceBGM.volume =
-                0;
-        }
+        audioSourceBGM.volume =
+            data.BGM
+            ?
+            data.volume
+            :
+            0;
 
         PlayBGM();
     }
@@ -77,6 +94,16 @@ public class Soundmanager : MonoBehaviour
         bool isOn
     )
     {
+        // PlayerPrefs 저장
+        PlayerPrefs.SetInt(
+            "BGM",
+            isOn
+            ? 1
+            : 0
+        );
+
+        PlayerPrefs.Save();
+
         GameDataManager
             .Instance
             .playerData
@@ -92,14 +119,6 @@ public class Soundmanager : MonoBehaviour
             .volume
             :
             0;
-
-        GameDataManager
-            .Instance
-            .SaveData(
-                GameDataManager
-                .Instance
-                .playerData
-            );
     }
 
     public void ChangeBGMVolume(

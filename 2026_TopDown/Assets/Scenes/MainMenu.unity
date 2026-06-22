@@ -176,6 +176,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 47076738c2c7076428d67e4c7fa10804, type: 3}
     - target: {fileID: 9223322033161780846, guid: 7d6394c77e56b3c4b922042c24d1533a, type: 3}
+      propertyPath: bgmToggle
+      value: 
+      objectReference: {fileID: 505051038}
+    - target: {fileID: 9223322033161780846, guid: 7d6394c77e56b3c4b922042c24d1533a, type: 3}
       propertyPath: volumeSlider
       value: 
       objectReference: {fileID: 1798765608}
@@ -492,6 +496,34 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uAC8C\uC784\uC2DC\uC791\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1334926566}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOffBGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Soundmanager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751758858485451438, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6927637102808424599, guid: 0a6345d26b79b6940a8113dffb49e085, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -30.1
@@ -692,6 +724,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2678638098719390891, guid: 7d3ddc0c478f31a4a82b5fa0b0a1439c, type: 3}
+      propertyPath: playerStat
+      value: 
+      objectReference: {fileID: 11400000, guid: ab3bbad5a4b526142b7835ec39b21fa9, type: 2}
     - target: {fileID: 6089862866697579064, guid: 7d3ddc0c478f31a4a82b5fa0b0a1439c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 219.06778

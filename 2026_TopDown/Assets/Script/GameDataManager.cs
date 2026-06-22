@@ -8,10 +8,10 @@ public class PlayerData
 
     public bool BGM = true;
 
-    // 코인(골드)
+    // 코인
     public int gold = 0;
 
-    // 공격력
+    // 현재 공격력
     public int attack = 1;
 }
 
@@ -21,7 +21,10 @@ public class GameDataManager : MonoBehaviour
 
     public PlayerData playerData;
 
-    private void Awake()
+    // ScriptableObject 연결
+    public PlayerStatSO playerStat;
+
+    void Awake()
     {
         if (Instance == null)
         {
@@ -87,7 +90,8 @@ public class GameDataManager : MonoBehaviour
                     filePath
                 );
 
-            return JsonUtility
+            return
+                JsonUtility
                 .FromJson<PlayerData>(
                     json
                 );
@@ -111,7 +115,8 @@ public class GameDataManager : MonoBehaviour
         int amount
     )
     {
-        playerData.gold = amount;
+        playerData.gold =
+            amount;
 
         SaveData(
             playerData
@@ -120,18 +125,32 @@ public class GameDataManager : MonoBehaviour
 
     public int GetGold()
     {
-        return playerData.gold;
+        return
+            playerData.gold;
     }
 
     public int GetAttack()
     {
-        return playerData.attack;
+        if (
+            playerData.attack <= 0
+        )
+        {
+            return
+                playerStat
+                .baseAttack;
+        }
+
+        return
+            playerData.attack;
     }
 
     public void UpgradeAttack()
     {
         if (
-            playerData.gold < 5
+            playerData.gold
+            <
+            playerStat
+            .upgradeCost
         )
         {
             Debug.Log(
@@ -141,16 +160,20 @@ public class GameDataManager : MonoBehaviour
             return;
         }
 
-        playerData.gold -= 5;
+        playerData.gold -=
+            playerStat
+            .upgradeCost;
 
-        playerData.attack += 1;
+        playerData.attack +=
+            1;
 
         SaveData(
             playerData
         );
 
         if (
-            CoinManager.instance
+            CoinManager
+            .instance
             != null
         )
         {
@@ -168,10 +191,23 @@ public class GameDataManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        // 게임 종료 시 초기화
-        playerData.gold = 0;
+        playerData.gold =
+            0;
 
-        playerData.attack = 1;
+        if (
+            playerStat
+            != null
+        )
+        {
+            playerData.attack =
+                playerStat
+                .baseAttack;
+        }
+        else
+        {
+            playerData.attack =
+                1;
+        }
 
         SaveData(
             playerData
