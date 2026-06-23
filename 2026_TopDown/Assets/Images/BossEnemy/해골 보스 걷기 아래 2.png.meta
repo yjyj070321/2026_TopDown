@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6a2889be4d23314f95dea95221e4587
+guid: 70c6043cd57f2bb4d888f3a613c0bd42
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -844464835002321270
-    second: png-transparent-computer-icons-others-miscellaneous-angle-text_0
+      213: 4202212507419467823
+    second: "\uD574\uACE8 \uBCF4\uC2A4 \uAC77\uAE30 \uC544\uB798 2_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: png-transparent-computer-icons-others-miscellaneous-angle-text_0
+      name: "\uD574\uACE8 \uBCF4\uC2A4 \uAC77\uAE30 \uC544\uB798 2_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 920
-        height: 512
+        x: 9
+        y: 4
+        width: 32
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a86b06ce4bbd744f0800000000000000
-      internalID: -844464835002321270
+      spriteID: f20e07fd202415a30800000000000000
+      internalID: 4202212507419467823
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      png-transparent-computer-icons-others-miscellaneous-angle-text_0: -844464835002321270
+      "\uD574\uACE8 \uBCF4\uC2A4 \uAC77\uAE30 \uC544\uB798 2_0": 4202212507419467823
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

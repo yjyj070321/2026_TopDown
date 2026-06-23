@@ -2,37 +2,38 @@ using UnityEngine;
 
 public class SwordHit : MonoBehaviour
 {
-    private void OnTriggerEnter2D(
-        Collider2D other
-    )
-    {
+private void OnTriggerEnter2D(
+Collider2D other
+)
+{
+if (
+other.CompareTag(
+"Enemy"
+)
+)
+{
+Enemy enemy =
+other.GetComponent<
+Enemy
+>();
+
         if (
-            other.CompareTag(
-                "Enemy"
-            )
+            enemy != null
         )
         {
-            Enemy enemy =
-                other.GetComponent<
-                    Enemy
-                >();
+            enemy.TakeDamage(
+                PlayerAttack
+                .CurrentDamage
+            );
 
-            if (
-                enemy != null
-            )
-            {
-                enemy.TakeDamage(
-                    PlayerAttack
-                    .CurrentDamage
-                );
-
-                Debug.Log(
-                    "공격력 : "
-                    +
-                    PlayerAttack
-                    .CurrentDamage
-                );
-            }
+            Debug.Log(
+                "공격력 : "
+                +
+                PlayerAttack
+                .CurrentDamage
+            );
         }
     }
+}
+
 }

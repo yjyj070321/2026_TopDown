@@ -128,7 +128,7 @@ public class Blacksmith : MonoBehaviour
             0f;
 
         costText.text =
-            "강화 비용 : 5 골드";
+            "강화 비용 : 5 코인";
     }
 
     public void Upgrade()
